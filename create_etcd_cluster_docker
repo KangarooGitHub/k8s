@@ -11,3 +11,6 @@ docker run -d -p 2379:2379 -p 2380:2380 --name etcd0 $IMG $ARGS -name etcd0 -adv
 docker run -d -p 2479:2379 -p 2480:2380 --name etcd1 $IMG $ARGS -name etcd1 -advertise-client-urls $HTTPIP:2479 -initial-advertise-peer-urls $HTTPIP:2480
 docker run -d -p 2579:2379 -p 2580:2380 --name etcd2 $IMG $ARGS -name etcd2 -advertise-client-urls $HTTPIP:2579 -initial-advertise-peer-urls $HTTPIP:2580
 docker run -d -p 8000:8080 --restart always --name etcd $IMG -proxy on -listen-client-urls http://0.0.0.0:8080 -initial-cluster $CLUSTER
+
+curl -L 172.16.106.42:8000/v2/keys/mykey1 -XPUT -d value="alice"
+curl -L 172.16.106.42:8000/v2/keys/mykey1 
